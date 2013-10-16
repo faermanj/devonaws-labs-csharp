@@ -25,17 +25,8 @@ namespace AwsLabs
 
         public SystemEnvironmentAWSCredentials()
         {
-            string accessKey = Environment.GetEnvironmentVariable("AWS_ACCESS_KEY_ID", EnvironmentVariableTarget.User);
-            if (String.IsNullOrEmpty(accessKey))
-            {
-                accessKey = Environment.GetEnvironmentVariable("AWSAccessKey", EnvironmentVariableTarget.User);
-            }
-
-            string secretKey = Environment.GetEnvironmentVariable("AWS_SECRET_KEY", EnvironmentVariableTarget.User);
-            if (String.IsNullOrEmpty(secretKey))
-            {
-                secretKey = Environment.GetEnvironmentVariable("AWSSecretKey", EnvironmentVariableTarget.User);
-            }
+            string accessKey = Environment.GetEnvironmentVariable("AWS_ACCESS_KEY_ID");
+            string secretKey = Environment.GetEnvironmentVariable("AWS_SECRET_KEY");
 
             if (String.IsNullOrEmpty(accessKey) || String.IsNullOrEmpty(secretKey))
             {

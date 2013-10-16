@@ -51,8 +51,13 @@ namespace AwsLabs
                 var scanRequest = new ScanRequest
                 {
                     Select = "ALL_ATTRIBUTES",
-                    TableName = tableName,
-                    ScanFilter = new Dictionary<string, Condition>
+                    TableName = tableName
+                };
+
+                // If the filter criteria is empty, then don't filter it.
+                if (!String.IsNullOrEmpty(keyPrefix))
+                {
+                    scanRequest.ScanFilter = new Dictionary<string, Condition>
                     {
                         {
                             "Key",
@@ -65,8 +70,9 @@ namespace AwsLabs
                                 }
                             }
                         }
-                    }
-                };
+                    };
+                }
+
                 return dynamoDbClient.Scan(scanRequest).ScanResult.Items;
 
             }

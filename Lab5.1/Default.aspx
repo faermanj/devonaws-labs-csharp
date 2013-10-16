@@ -6,6 +6,9 @@
 <head id="Head1" runat="server">
     <title>Developing on AWS - Lab5.1</title>
     <link rel="stylesheet" href="styles/styles.css" type="text/css" media="screen"/>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
 </head>
 
 <body>

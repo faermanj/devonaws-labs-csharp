@@ -92,9 +92,9 @@ namespace AwsLabs
             // Check to see that we have our region in the settings
             if (String.IsNullOrEmpty(ConfigurationManager.AppSettings["PARAM3"]))
             {
-                LogMessageToPage("PARAM3 wasn't defined in settings, using default value \"icons.\"");
+                LogMessageToPage("PARAM3 wasn't defined in settings. Setting it to an empty string.");
                 // The value is empty, so put a default value for testing in there.
-                ConfigurationManager.AppSettings["PARAM3"] = "icons";
+                ConfigurationManager.AppSettings["PARAM3"] = "";
             }
 
             // We have a table name and a region, so let's see if the table exists.
@@ -104,7 +104,7 @@ namespace AwsLabs
                 if (tableDescription == null)
                 {
                     // No table. Create it.
-                    StatusLog.Add("No table found. Creating it.");
+                    LogMessageToPage("No table found. Creating it.");
                     OptionalLabCode.BuildTable(dynamoDbClient, tableName);
                     tableDescription = OptionalLabCode.GetTableDescription(dynamoDbClient, tableName);
                 }
@@ -113,7 +113,7 @@ namespace AwsLabs
                 if (!OptionalLabCode.ValidateSchema(tableDescription))
                 {
                     //Not valid, so we need to rebuild it.
-                    StatusLog.Add("Table schema is incorrect. Dropping table and rebuilding it.");
+                    LogMessageToPage("Table schema is incorrect. Dropping table and rebuilding it.");
                     OptionalLabCode.DeleteTable(dynamoDbClient, tableName);
                     OptionalLabCode.BuildTable(dynamoDbClient, tableName);
                 }
