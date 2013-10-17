@@ -138,7 +138,11 @@ namespace AwsLabs
                     using (var s3Client = LabCode.CreateS3Client(_credentials))
                     {
                         // Create the bucket
-                        s3Client.PutBucket(new PutBucketRequest {BucketName = bucketName});
+                        s3Client.PutBucket(new PutBucketRequest
+                        {
+                            BucketName = bucketName,
+                            UseClientRegion = true
+                        });
                         foreach (string image in missingImages)
                         {
                             string filePath = HttpRuntime.AppDomainAppPath + image;

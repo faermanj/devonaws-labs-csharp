@@ -24,7 +24,8 @@ namespace AwsLabs
             // Create the request
             var putBucketRequest = new PutBucketRequest
             {
-                BucketName = bucketName
+                BucketName = bucketName,
+                UseClientRegion = true
             };
 
             // Create the bucket

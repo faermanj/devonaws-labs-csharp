@@ -104,7 +104,7 @@ namespace AwsLabs
 
         virtual public  void PrepMode_CreateBucket(AmazonS3Client s3Client, string bucketName)
         {
-            var putBucketRequest = new PutBucketRequest {BucketName = bucketName};
+            var putBucketRequest = new PutBucketRequest {BucketName = bucketName, UseClientRegion = true};
             s3Client.PutBucket(putBucketRequest);
         }
 
