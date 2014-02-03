@@ -19,7 +19,7 @@ namespace AwsLabs
 {
     internal class SolutionCode : ILabCode, IOptionalLabCode
     {
-        public virtual void CreateBucket(AmazonS3 s3Client, string bucketName)
+        public virtual void CreateBucket(AmazonS3Client s3Client, string bucketName)
         {
             // Create the request
             var putBucketRequest = new PutBucketRequest
@@ -32,7 +32,7 @@ namespace AwsLabs
             s3Client.PutBucket(putBucketRequest);
         }
 
-        public virtual void PutObject(AmazonS3 s3Client, string bucketName, string sourceFile, string objectKey)
+        public virtual void PutObject(AmazonS3Client s3Client, string bucketName, string sourceFile, string objectKey)
         {
             // Create the request
             var putObjectRequest = new PutObjectRequest
@@ -46,7 +46,7 @@ namespace AwsLabs
             s3Client.PutObject(putObjectRequest);
         }
 
-        public virtual void ListObjects(AmazonS3 s3Client, string bucketName)
+        public virtual void ListObjects(AmazonS3Client s3Client, string bucketName)
         {
             // Create the request
             var listObjectsRequest = new ListObjectsRequest
@@ -64,21 +64,20 @@ namespace AwsLabs
             }
         }
 
-        public virtual void MakeObjectPublic(AmazonS3 s3Client, string bucketName, string key)
+        public virtual void MakeObjectPublic(AmazonS3Client s3Client, string bucketName, string key)
         {
             // Create the request
-            var setAclRequest = new SetACLRequest
-            {
+            var putAclRequest = new PutACLRequest {
                 BucketName = bucketName,
                 Key = key,
                 CannedACL = S3CannedACL.PublicRead
             };
 
             // Submit the request
-            s3Client.SetACL(setAclRequest);
+            s3Client.PutACL(putAclRequest);
         }
 
-        public virtual string GeneratePreSignedUrl(AmazonS3 s3Client, string bucketName, string key)
+        public virtual string GeneratePreSignedUrl(AmazonS3Client s3Client, string bucketName, string key)
         {
             // Create the request
             var getPreSignedUrlRequest = new GetPreSignedUrlRequest
@@ -92,7 +91,7 @@ namespace AwsLabs
             return s3Client.GetPreSignedURL(getPreSignedUrlRequest);
         }
 
-        public virtual void DeleteBucket(AmazonS3 s3Client, string bucketName)
+        public virtual void DeleteBucket(AmazonS3Client s3Client, string bucketName)
         {
             // First, try to delete the bucket. 
             var deleteBucketRequest = new DeleteBucketRequest
@@ -122,7 +121,7 @@ namespace AwsLabs
             foreach (S3Object obj in s3Client.ListObjects(new ListObjectsRequest {BucketName = bucketName}).S3Objects)
             {
                 // Add keys for the objects to the delete request
-                deleteObjectsRequest.AddKey(new KeyVersion(obj.Key));
+                deleteObjectsRequest.AddKey(obj.Key, null);
             }
 
             // Submit the request

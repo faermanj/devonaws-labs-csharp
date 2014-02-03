@@ -17,10 +17,10 @@ namespace AwsLabs
 {
     internal interface ILabCode
     {
-        void CreateBucket(AmazonS3 s3Client, string bucketName);
-        void PutObject(AmazonS3 s3Client, string bucketName, string sourceFile, string objectKey);
-        void ListObjects(AmazonS3 s3Client, string bucketName);
-        void MakeObjectPublic(AmazonS3 s3Client, string bucketName, string key);
-        string GeneratePreSignedUrl(AmazonS3 s3Client, string bucketName, string key);
+        void CreateBucket(AmazonS3Client s3Client, string bucketName);
+        void PutObject(AmazonS3Client s3Client, string bucketName, string sourceFile, string objectKey);
+        void ListObjects(AmazonS3Client s3Client, string bucketName);
+        void MakeObjectPublic(AmazonS3Client s3Client, string bucketName, string key);
+        string GeneratePreSignedUrl(AmazonS3Client s3Client, string bucketName, string key);
     }
 }

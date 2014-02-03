@@ -17,6 +17,6 @@ namespace AwsLabs
 {
     internal interface IOptionalLabCode
     {
-        void DeleteBucket(AmazonS3 s3Client, string bucketName);
+        void DeleteBucket(AmazonS3Client s3Client, string bucketName);
     }
 }

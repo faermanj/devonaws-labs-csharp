@@ -210,12 +210,12 @@ namespace AwsLabs
                     Console.WriteLine("\tBody : {0}", message.Body);
                 }
 
-                if (message.Attribute.Count > 0)
+                if (message.Attributes.Count > 0)
                 {
                     Console.WriteLine("\tMessage Attributes");
-                    foreach (var entry in message.Attribute)
+                    foreach (var entry in message.Attributes)
                     {
-                        Console.WriteLine("\t\t{0} : {1}", entry.Name, entry.Value);
+                        Console.WriteLine("\t\t{0} : {1}", entry.Key, entry.Value);
                     }
                 }
 

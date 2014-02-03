@@ -42,7 +42,7 @@ namespace AwsLabs
             try
             {
                 // Create an S3 client
-                AmazonS3 s3Client = new AmazonS3Client(RegionEndpoint);
+                var s3Client = new AmazonS3Client(RegionEndpoint);
 
                 // Create a unique bucket name
                 var bucketName = "awslab" + Guid.NewGuid().ToString().Substring(0, 8);

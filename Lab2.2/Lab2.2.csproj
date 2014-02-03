@@ -65,10 +65,8 @@
   </Target>
   -->
   <ItemGroup>
-    <Reference Include="AWSSDK, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files (x86)\AWS SDK for .NET\bin\AWSSDK.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="AWSSDK">
+      <HintPath>..\packages\AWSSDK.2.0.7.0\lib\net35\AWSSDK.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -116,6 +114,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="LICENSE" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LabUtility\LabUtility.csproj">

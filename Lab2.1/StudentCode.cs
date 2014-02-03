@@ -26,7 +26,7 @@ namespace AwsLabs
         /// <param name="s3Client">The S3 client object.</param>
         /// <param name="bucketName">The name of the bucket to create.</param>
         /// <remarks>The purpose of this task is to gain experience working with S3 programmatically.</remarks>
-        public override void CreateBucket(AmazonS3 s3Client, string bucketName)
+        public override void CreateBucket(AmazonS3Client s3Client, string bucketName)
         {
             //TODO: Replace this call to the base class with your own method implementation.
             base.CreateBucket(s3Client, bucketName);
@@ -41,7 +41,7 @@ namespace AwsLabs
         /// <param name="sourceFile">The name of the file to upload.</param>
         /// <param name="objectKey">The key to assign to the new S3 object.</param>
         /// <remarks>The purpose of this task is to gain experience working with S3 programmatically.</remarks>
-        public override void PutObject(AmazonS3 s3Client, string bucketName, string sourceFile, string objectKey)
+        public override void PutObject(AmazonS3Client s3Client, string bucketName, string sourceFile, string objectKey)
         {
             //TODO: Replace this call to the base class with your own method implementation.
             base.PutObject(s3Client, bucketName, sourceFile, objectKey);
@@ -54,7 +54,7 @@ namespace AwsLabs
         /// <param name="s3Client">The S3 client object.</param>
         /// <param name="bucketName">The name of the bucket containing the objects to list.</param>
         /// <remarks>The purpose of this task is to gain experience working with S3 programmatically.</remarks>
-        public override void ListObjects(AmazonS3 s3Client, string bucketName)
+        public override void ListObjects(AmazonS3Client s3Client, string bucketName)
         {
             //TODO: Replace this call to the base class with your own method implementation.
             base.ListObjects(s3Client, bucketName);
@@ -69,7 +69,7 @@ namespace AwsLabs
         /// <param name="bucketName">The name of the bucket containing the object.</param>
         /// <param name="key">The key used to identify the object.</param>
         /// <remarks>The purpose of this task is to gain experience working with S3 programmatically.</remarks>
-        public override void MakeObjectPublic(AmazonS3 s3Client, string bucketName, string key)
+        public override void MakeObjectPublic(AmazonS3Client s3Client, string bucketName, string key)
         {
             //TODO: Replace this call to the base class with your own method implementation.
             base.MakeObjectPublic(s3Client, bucketName, key);
@@ -85,7 +85,7 @@ namespace AwsLabs
         /// <param name="key">The key used to identify the object.</param>
         /// <remarks>The purpose of this task is to gain experience working with S3 programmatically.</remarks>
         /// <returns>The pre-signed URL for the object.</returns>
-        public override string GeneratePreSignedUrl(AmazonS3 s3Client, string bucketName, string key)
+        public override string GeneratePreSignedUrl(AmazonS3Client s3Client, string bucketName, string key)
         {
             //TODO: Replace this call to the base class with your own method implementation.
             return base.GeneratePreSignedUrl(s3Client, bucketName, key);
@@ -104,7 +104,7 @@ namespace AwsLabs
         ///     The purpose of this task is to gain experience writing applications that remove unused AWS resources
         ///     in an automated manner.
         /// </remarks>
-        public override void DeleteBucket(AmazonS3 s3Client, string bucketName)
+        public override void DeleteBucket(AmazonS3Client s3Client, string bucketName)
         {
             base.DeleteBucket(s3Client, bucketName);
         }

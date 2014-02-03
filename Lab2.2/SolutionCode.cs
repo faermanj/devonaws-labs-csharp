@@ -182,7 +182,7 @@ namespace AwsLabs
                         TableName = tableName
                     });
 
-                return describeTableResponse.DescribeTableResult.Table;
+                return describeTableResponse.Table;
             }
             catch (AmazonServiceException ase)
             {

@@ -34,7 +34,7 @@ namespace AwsLabs
             CreateQueueResponse createQueueResponse = sqsClient.CreateQueue(createQueueRequest);
 
             // Return the URL for the newly created queue
-            queueUrl = createQueueResponse.CreateQueueResult.QueueUrl;
+            queueUrl = createQueueResponse.QueueUrl;
             return queueUrl;
         }
 
@@ -46,7 +46,7 @@ namespace AwsLabs
             var getQueueAttributesRequest = new GetQueueAttributesRequest
             {
                 QueueUrl = queueUrl,
-                AttributeName =
+                AttributeNames =
                 {
                     "QueueArn"
                 }
@@ -57,7 +57,7 @@ namespace AwsLabs
                 sqsClient.GetQueueAttributes(getQueueAttributesRequest);
 
             // Add the discovered ARN to the queueArnList variable.
-            queueArn = getQueueAttributesResponse.GetQueueAttributesResult.QueueARN;
+            queueArn = getQueueAttributesResponse.QueueARN;
             return queueArn;
         }
 
@@ -74,7 +74,7 @@ namespace AwsLabs
             CreateTopicResponse topicResponse = snsClient.CreateTopic(createTopicRequest);
 
             // Return the ARN
-            topicArn = topicResponse.CreateTopicResult.TopicArn;
+            topicArn = topicResponse.TopicArn;
             return topicArn;
         }
 
@@ -133,7 +133,7 @@ namespace AwsLabs
             };
             // Submit the request and return the response
             ReceiveMessageResponse resp = sqsClient.ReceiveMessage(receiveMessageRequest);
-            return resp.ReceiveMessageResult.Message;
+            return resp.Messages;
         }
 
         public virtual void RemoveMessage(AmazonSQSClient sqsClient, string queueUrl, string receiptHandle)
@@ -161,7 +161,7 @@ namespace AwsLabs
 
             foreach (
                 Subscription subscription in
-                    listSubscriptionsByTopicResponse.ListSubscriptionsByTopicResult.Subscriptions)
+                    listSubscriptionsByTopicResponse.Subscriptions)
             {
                 var unsubscribeRequest = new UnsubscribeRequest
                 {
@@ -212,17 +212,14 @@ namespace AwsLabs
                 }
             };
 
-            var attribute = new Attribute
-            {
-                Name = "Policy",
-                Value = policy.ToJson()
-            };
+            var attributes = new Dictionary<string, string>();
+            attributes.Add("Policy", policy.ToJson());
 
             // Create the request to set the queue attributes for policy
             var setQueueAttributesRequest = new SetQueueAttributesRequest
             {
                 QueueUrl = queueUrl,
-                Attribute = new List<Attribute> {attribute}
+                Attributes = attributes
             };
 
             // Set the queue policy

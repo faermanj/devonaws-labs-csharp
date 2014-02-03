@@ -37,7 +37,7 @@ namespace AwsLabs
             var userArn = String.Empty;
             var getUserRequest = new GetUserRequest {UserName = userName};
             // Send the request and save the user arn.
-            userArn = iamClient.GetUser(getUserRequest).GetUserResult.User.Arn;
+            userArn = iamClient.GetUser(getUserRequest).User.Arn;
 
             return userArn;
         }
@@ -55,7 +55,7 @@ namespace AwsLabs
                 AssumeRolePolicyDocument = trustRelationshipText,
                 RoleName = roleName
             };
-            roleArn = iamClient.CreateRole(createRoleRequest).CreateRoleResult.Role.Arn;
+            roleArn = iamClient.CreateRole(createRoleRequest).Role.Arn;
 
             // Use the PutRolePolicyRequest object to define the request. Select whatever policy name you would like.
             // The PolicyDocument property is there the policy is described.
@@ -81,7 +81,7 @@ namespace AwsLabs
                     // Remove existing policies
                     var listRolePoliciesResponse =
                         iamClient.ListRolePolicies(new ListRolePoliciesRequest {RoleName = roleName});
-                    foreach (var policyName in listRolePoliciesResponse.ListRolePoliciesResult.PolicyNames)
+                    foreach (var policyName in listRolePoliciesResponse.PolicyNames)
                     {
                         var deleteRolePolicyRequest = new DeleteRolePolicyRequest
                         {
@@ -128,7 +128,7 @@ namespace AwsLabs
                 try
                 {
                     AssumeRoleResponse assumeRoleResponse = stsClient.AssumeRole(assumeRoleRequest);
-                    credentials = assumeRoleResponse.AssumeRoleResult.Credentials;
+                    credentials = assumeRoleResponse.Credentials;
                     
                     retry = false;
                 }
@@ -231,7 +231,7 @@ namespace AwsLabs
                     {
                         var deleteObjectRequest = new DeleteObjectRequest
                         {
-                            BucketName = s3Object.BucketName,
+                            BucketName = bucketName,
                             Key = s3Object.Key
                         };
                         s3Client.DeleteObject(deleteObjectRequest);

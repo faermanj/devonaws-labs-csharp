@@ -73,7 +73,7 @@ namespace AwsLabs
                     };
                 }
 
-                return dynamoDbClient.Scan(scanRequest).ScanResult.Items;
+                return dynamoDbClient.Scan(scanRequest).Items;
 
             }
             catch (Exception ex)
@@ -134,7 +134,7 @@ namespace AwsLabs
                 };
 
                 QueryResponse queryResponse = dynamoDbClient.Query(queryRequest);
-                return queryResponse.QueryResult.Count > 0;
+                return queryResponse.Count > 0;
             }
             catch (Exception ex)
             {
@@ -225,7 +225,7 @@ namespace AwsLabs
                         TableName = tableName
                     });
 
-                return describeTableResponse.DescribeTableResult.Table;
+                return describeTableResponse.Table;
             }
             catch (AmazonServiceException ase)
             {

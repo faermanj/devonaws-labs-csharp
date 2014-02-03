@@ -32,7 +32,7 @@ namespace AwsLabs
             {
                 throw new Exception("No credentials found in the system environment.");
             }
-            _credentials = new ImmutableCredentials(accessKey, secretKey, "", true);
+            _credentials = new ImmutableCredentials(accessKey, secretKey, "");
         }
 
         public override ImmutableCredentials GetCredentials()

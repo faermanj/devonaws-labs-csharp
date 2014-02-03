@@ -89,10 +89,10 @@ namespace AwsLabs
 
                     Console.WriteLine("Requesting matches for Company == Amazon.com");
                     QueryResponse response = LabCode.LookupByHashKey(ddbClient, tableName, "Amazon.com");
-                    if (response != null && response.QueryResult.Count > 0)
+                    if (response != null && response.Count > 0)
                     {
                         // Record was found
-                        foreach (var item in response.QueryResult.Items)
+                        foreach (var item in response.Items)
                         {
                             Console.WriteLine("Item Found-");
                             foreach (var attr in item)
